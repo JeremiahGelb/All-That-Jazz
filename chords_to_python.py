@@ -1,3 +1,4 @@
+import pickle
 from Chord import Chord
 
 line_count = 0
@@ -5,6 +6,8 @@ chord_count = 0
 complete_songs_count = 0
 exception_count = 0
 unknown_set = set()
+
+PICKLE_FILE = "songs.pickle"
 
 songs = []
 
@@ -43,3 +46,6 @@ print("complete_songs_count:",  complete_songs_count)
 print("total chords(not unique):", chord_count)
 print("total unknown chords:", exception_count)
 print("total types of unkown chords:", len(unknown_set))
+
+with open(PICKLE_FILE, "wb") as f:
+    pickle.dump(songs, f)

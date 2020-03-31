@@ -22,3 +22,15 @@ for root in range(chord.number_of_unique_roots):
         if (chord != chord2):
             print("ERROR with np array")
             print(chord, chord2)
+
+print("Loading pickled songs...")
+from load_pickle import return_songs_as_list_of_lists_of_chords, return_songs_as_list_of_lists_of_np_arrays
+songs_chords = return_songs_as_list_of_lists_of_chords()
+songs_arrays = return_songs_as_list_of_lists_of_np_arrays()
+
+print("testing pickle...")
+for song_index, song in enumerate(songs_chords):
+    for chord_index, chord in enumerate(song):
+        if (chord != Chord(np_array=songs_arrays[song_index][chord_index])):
+            print("error depickling")
+            print(chord, Chord(np_array=songs_arrays[song_index][chord_index]))
