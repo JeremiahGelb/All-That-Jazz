@@ -35,7 +35,8 @@ for e in unknown_set:
     print(e)
 
 for chord in songs[0]:
-    print(chord)
+    #print(chord)
+    pass
 
 print("total songs:", line_count)
 print("complete_songs_count:",  complete_songs_count)
