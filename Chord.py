@@ -20,7 +20,7 @@ class Chord:
 
     def __init__(self, chord_string=None):
         self.base()
-        if chord_string is not None:
+        if chord_string:
             try:
                 root_string, quality_string = chord_string.split(':')
                 self.root = self.to_root_int[root_string]

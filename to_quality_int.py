@@ -2,6 +2,9 @@ TO_QUALITY_INT = {
     # major
     '' : 0,
     None : 0,
+    '(1,5)' : 0, # assuming major for this power chord
+    'maj7/6' : 0,
+    '(1,5)/3' : 0,
     'maj6/6' : 0,
     '9/6' : 0,
     '6(9)/3' : 0,
@@ -34,6 +37,7 @@ TO_QUALITY_INT = {
     'maj' : 0,
 
     # 7
+    'maj(b7,9,11,13)/b7' : 1,
     '7/6' : 1,
     'maj(b7,9,11,13)/3' : 1,
     '7/2' : 1,
@@ -46,6 +50,11 @@ TO_QUALITY_INT = {
     '7' : 1,
 
     # min7
+    'min9/b7' : 2,
+    'min9/2' : 2,
+    'min(7)/5' : 2,
+    'min7/6' : 2,
+    'min(b7,9,11,13)' : 2,
     '9/b3' : 2,
     'min(7)/7' : 2,
     'min7/2' : 2,
@@ -67,6 +76,8 @@ TO_QUALITY_INT = {
     'min7' : 2,
 
     # min6
+    'min(6,9)' : 3,
+    'min/6' : 3,
     'min6/b3' : 3,
     'min6/6' : 3,
     'min6/5' : 3,
@@ -74,6 +85,9 @@ TO_QUALITY_INT = {
     'min6' : 3,
 
     # dim
+    'dim/b5' : 4,
+    'dim/b7' : 4,
+    '(1,b3,b5)/6' : 4,
     'dim/4' : 4,
     'dim/6' : 4,
     'dim/3' : 4,
@@ -88,6 +102,8 @@ TO_QUALITY_INT = {
     "hdim" : 5,
 
     # sus 4
+    'sus4/6' : 6,
+    'sus4(b7,9)/5' : 6,
     'maj/4' : 6,
     'sus4(b7)/b7' : 6,
     'sus4(b7)/6' : 6,
@@ -103,6 +119,10 @@ TO_QUALITY_INT = {
     'sus4' : 6,
 
     # flat 5 flat regular 9
+    'maj/b5' : 7,
+    '7(s11)/5' : 7,
+    'maj(7,9,s11,13)' : 7,
+    '9/b5' : 7,
     '(1,3,b5,b7,9,13)' : 7,
     '9(b5,*5)' : 7,
     'maj(b7,9,s11,13)' : 7,
@@ -113,7 +133,9 @@ TO_QUALITY_INT = {
     '(1,3,b5,b7,9,13)/b5' : 7,
     '7(b5,*5)' : 7,
     
-    # just b9
+    # just b9 (dominant)
+    'maj(b7,b9,11,13)/4' : 8,
+    'min(7)/b2' : 8,
     '7(b9)/2' : 8,
     'maj/b2' : 8,
     'maj(b7,b9,11,13)' : 8,
@@ -126,6 +148,7 @@ TO_QUALITY_INT = {
     '7(s9)' : 9,
 
     #sharp 5 flat 9
+    'aug(b7,9,11,13)' : 10,
     '7(s5,*5,b9)' : 10,
     '7(b9,11,b13)' : 10,
 
@@ -133,6 +156,8 @@ TO_QUALITY_INT = {
     '7(s5,*5,s9)' : 11,
 
     # #5 regular 9
+    'aug/b6' : 12,
+    'aug/3' : 12,
     'aug(7)' : 12,
     'maj/b6' : 12,
     'aug' : 12,
@@ -142,6 +167,8 @@ TO_QUALITY_INT = {
     'aug(b7)' : 12,
 
     # sus 2
+    'aug(b7)/3' : 13,
+    'aug/2' : 13,
     '(1,5)/2' : 13,
     'maj(2,*3)/5' : 13,
     'maj(2,*3)' : 13,
@@ -151,6 +178,7 @@ TO_QUALITY_INT = {
     'maj7/b3' : 14,
 
     #jimi hendrix (sharp 9)
+    '7(s9)/5' : 15,
     'maj(b7,s9,11,13)' : 15,
 
     #flat 5 flat 9
