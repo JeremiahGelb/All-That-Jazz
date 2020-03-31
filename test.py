@@ -12,16 +12,17 @@ with open("test.txt","r") as f:
         line_count = line_count + 1
         for chord_string in line.split(" "):
             if chord_string:
+                chord_count = chord_count + 1
                 try:
-                    chord_count = chord_count + 1
                     Chord(chord_string)
                 except Exception as e:
                     unknown_set.add(str(e))
                     exception_count = exception_count + 1
 
+for e in unknown_set:
+    print(e)
+
 print("total songs:", line_count)
 print("total chords(not unique):", chord_count)
 print("total unknown chords:", exception_count)
 print("total types of unkown chords:", len(unknown_set))
-for e in unknown_set:
-    print(e)

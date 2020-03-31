@@ -126,6 +126,7 @@ class Chord:
             'sus4' : 6,
 
             # altered dominant
+            '(1,3,b5,b7,9,13)' : 7,
             '9(b5,*5)' : 7,
             'maj(b7,9,s11,13)' : 7,
             '7(b5,*5)/5' : 7,
@@ -155,7 +156,6 @@ class Chord:
             'maj(2,*3)/5' : 9,
             'maj(2,*3)' : 9,
             'sus2' : 9,
-
         }
 
         self.to_root_string = {}
@@ -170,7 +170,7 @@ class Chord:
             self.quality = self.to_quality_int[quality_string]
         except KeyError as e:
             # print("Chord:", chord_string)
-            print("UNRECOGNIZED VALUE:", e)
+            #print("UNRECOGNIZED VALUE:", e)
             raise
         except ValueError as e:
             try:
@@ -178,7 +178,7 @@ class Chord:
                 self.quality = self.to_quality_int[None]
             except KeyError as e:
                 # print("Chord:", chord_string)
-                print("UNRECOGNIZED whole chord:", e)
+                #print("UNRECOGNIZED whole chord:", e)
                 raise
 
 
