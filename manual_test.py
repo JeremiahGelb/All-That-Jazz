@@ -13,5 +13,12 @@ except:
 
 
 chord = Chord()
-print(chord)
-
+print(chord, Chord(np_array=chord.np_array()))
+for root in range(chord.number_of_unique_roots):
+    for quality in range(chord.number_of_unique_qualities):
+        chord.root = root
+        chord.quality = quality
+        chord2 = Chord(np_array=chord.np_array())
+        if (chord != chord2):
+            print("ERROR with np array")
+            print(chord, chord2)
