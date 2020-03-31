@@ -201,3 +201,6 @@ class Chord:
         root = self.to_root_string[self.root] if self.root != EMPTY_FIELD else "empty"
         quality = self.to_quality_string[self.quality] if self.quality != EMPTY_FIELD else "empty"
         return root + ":" + quality
+
+    def __eq__(self, other):
+        return self.quality == other.quality and self.root == other.root

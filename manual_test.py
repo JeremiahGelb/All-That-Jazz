@@ -1,10 +1,10 @@
 from Chord import Chord
 
-chord = Chord("C:maj")
-print(chord)
+chord1 = Chord("C:maj")
 
-chord = Chord("Db")
-print(chord)
+chord2 = Chord("C")
+
+print(chord1, "=", chord2, "?", chord1==chord2)
 
 try:
     chord = Chord("this_wi:ll_fail")
@@ -14,3 +14,4 @@ except:
 
 chord = Chord()
 print(chord)
+
