@@ -6,4 +6,11 @@ print(chord)
 chord = Chord("Db")
 print(chord)
 
-chord = Chord("this_wi:ll_fail")
+try:
+    chord = Chord("this_wi:ll_fail")
+except:
+    print("failed as expected")
+
+
+chord = Chord()
+print(chord)

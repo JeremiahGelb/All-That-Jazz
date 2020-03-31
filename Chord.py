@@ -1,7 +1,9 @@
+EMPTY_FIELD = -1
+
 class Chord:
     def base(self):
-        self.root = -1
-        self.quality = -1
+        self.root = EMPTY_FIELD
+        self.quality = EMPTY_FIELD
         self.to_root_int = {
             #enharmonic to C
             'B#' : 0,
@@ -51,6 +53,7 @@ class Chord:
         self.to_quality_int = {
             # major
             '' : 0,
+            None : 0,
             'maj(7,9,11,13)' : 0,
             'maj(2,*3)/3' : 0,
             '9/3' : 0,
@@ -169,25 +172,32 @@ class Chord:
         for key in self.to_root_int:
             self.to_root_string[self.to_root_int[key]] = key
 
-    def __init__(self, chord_string):
+        self.to_quality_string = {}
+        for key in self.to_quality_int:
+            self.to_quality_string[self.to_quality_int[key]] = key
+
+    def __init__(self, chord_string=None):
         self.base()
-        try:
-            root_string, quality_string = chord_string.split(':')
-            self.root = self.to_root_int[root_string]
-            self.quality = self.to_quality_int[quality_string]
-        except KeyError as e:
-            # print("Chord:", chord_string)
-            #print("UNRECOGNIZED VALUE:", e)
-            raise
-        except ValueError as e:
+        if chord_string is not None:
             try:
-                self.root = self.to_root_int[chord_string]
-                self.quality = self.to_quality_int[None]
+                root_string, quality_string = chord_string.split(':')
+                self.root = self.to_root_int[root_string]
+                self.quality = self.to_quality_int[quality_string]
             except KeyError as e:
                 # print("Chord:", chord_string)
-                #print("UNRECOGNIZED whole chord:", e)
+                #print("UNRECOGNIZED VALUE:", e)
                 raise
+            except ValueError as e:
+                try:
+                    self.root = self.to_root_int[chord_string]
+                    self.quality = self.to_quality_int[None]
+                except KeyError as e:
+                    # print("Chord:", chord_string)
+                    #print("UNRECOGNIZED whole chord:", e)
+                    raise
 
 
     def __str__(self):
-        return self.to_root_string[self.root] + ':'
+        root = self.to_root_string[self.root] if self.root != EMPTY_FIELD else "empty"
+        quality = self.to_quality_string[self.quality] if self.quality != EMPTY_FIELD else "empty"
+        return root + ":" + quality
