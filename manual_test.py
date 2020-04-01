@@ -34,3 +34,6 @@ for song_index, song in enumerate(songs_chords):
         if (chord != Chord(np_array=songs_arrays[song_index][chord_index])):
             print("error depickling")
             print(chord, Chord(np_array=songs_arrays[song_index][chord_index]))
+
+for chord in songs_chords[0]:
+    print(chord)
