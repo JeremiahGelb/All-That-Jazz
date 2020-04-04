@@ -11,7 +11,7 @@ PICKLE_FILE = "songs.pickle"
 
 songs = []
 
-with open("test.txt","r") as f:
+with open("interesting_songs.txt","r") as f:
     for line in f:
         #bad hack to get rid of _START_ and _END_
         line = line[8:-7]

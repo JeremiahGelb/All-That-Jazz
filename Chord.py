@@ -41,7 +41,7 @@ class Chord:
         np_array = np.zeros((self.number_of_unique_roots * self.number_of_unique_qualities,))
         #grouping chords with the same root next to eachother
         index = self.number_of_unique_qualities * self.root + self.quality
-        np_array[index] = 1
+        np.put(np_array, index, 1)
         return np_array
 
     def set_from_chord_string(self, chord_string):
