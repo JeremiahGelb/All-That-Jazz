@@ -46,10 +46,10 @@ for root in range(chord.number_of_unique_roots):
 from data_gen import data_gen
 
 counter = 0
-for x,y,n in data_gen(chords_on_either_side=3, batch_size=10):
+#for x,y,n in data_gen(chords_on_either_side=3, batch_size=10):
     #print(len(x[0]))
-    print(np.shape(x))
-    print(np.shape(y))
-    counter = counter + 1
-    if counter > 0:
-        break
+    #print(np.shape(x))
+    #print(np.shape(y))
+    #counter = counter + 1
+    #if counter > 0:
+    #    break

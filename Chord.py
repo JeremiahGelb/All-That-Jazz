@@ -76,3 +76,9 @@ class Chord:
 
     def __eq__(self, other):
         return self.quality == other.quality and self.root == other.root
+
+    def __hash__(self):
+        return hash(self.quality) + hash(self.root)
+
+    def __lt__(self, other):
+        return self.root < other.root if self.root != other.root else self.quality < other.quality
