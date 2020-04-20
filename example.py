@@ -1,14 +1,18 @@
 
 from Chord import Chord
 from load_pickle import return_songs_as_list_of_lists_of_chords, return_songs_as_list_of_lists_of_np_arrays
+import numpy as np
 
 songs = return_songs_as_list_of_lists_of_np_arrays()
+print("Shape of songs",np.shape(songs))
 
 printed_one_already = False
 
 for song in songs:
     # at this level we have each song, which is a list of chords
+    print("Shape of song:",np.shape(song))
     for chord in song:
+        #print("Shape of chord:",np.shape(chord))
         # because of the import function I used,
         # chords are represented in numpy arrays (one hot)
         if not printed_one_already:
@@ -17,6 +21,7 @@ for song in songs:
             printed_one_already = True
             # if you want to go from an array to human readable, you can construct a Chord object
             chord_object = Chord(np_array=chord)
+            print("CHORD OBJECT:")
             print(chord_object)
 
             #rn there is no tranpose method on a chord, but you could implement it like this
@@ -24,6 +29,7 @@ for song in songs:
             semitones_up = 1
             new_root = (old_root + semitones_up) % chord_object.number_of_unique_roots
             chord_object.root = new_root
+            print("TRANSPOSED CHORD:")
             print(chord_object)
 
 
