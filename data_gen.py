@@ -57,7 +57,8 @@ def data_gen(chords_on_either_side=2, batch_size=10):
 
             x_batch.append(x)
             y_batch.append(y)
-
+        #print("Shape of x Batch: ")
         #print(np.shape(x_batch))
+        #print("Shape of y Batch: ")
         #print(np.shape(y_batch))
         yield np.array(x_batch), np.array(y_batch), [None] #Magic None to avoid warning :)

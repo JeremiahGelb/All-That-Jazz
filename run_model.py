@@ -17,9 +17,9 @@ chord_array_len = sample_chord.number_of_unique_roots * sample_chord.number_of_u
 
 batch_size = 50
 chords_on_either_side = 4
-STEPS_PER_EPOCH = 512
-TOTAL_EPOCHS = 30
-OUTPUT_BATCH = 5 # song created is of length (chords): (OUTPUT_BATCH * chords_on_either_side * 2) + OUTPUT_BATCH
+STEPS_PER_EPOCH = 1024
+TOTAL_EPOCHS = 100
+OUTPUT_BATCH = 25 # song created is of length (chords): (OUTPUT_BATCH * chords_on_either_side * 2) + OUTPUT_BATCH
 
 # START of model definition
 model = tf.keras.Sequential()
@@ -128,7 +128,7 @@ generated_song_file.write("Groove {}\n".format(mma_style))
 
 for idx in range(0,len(generated_song_np)):
     generated_song_file.write(str("{} ".format(idx+1)))
-    generated_song_str = str(generated_song_text[idx]).replace(":","")  #more translation would need to be done (seperate function) to fully automate (these 3 get it mostly in MMA format)
+    generated_song_str = str(generated_song_text[idx]).replace(":","")  #more translation would need to be done (seperate function) to fully automate (these get it mostly in MMA format)
     generated_song_str = generated_song_str.replace("min","m")
     generated_song_str = generated_song_str.replace("maj", "")
     generated_song_str = generated_song_str.replace("aug", "+")
