@@ -22,13 +22,17 @@ TOTAL_EPOCHS = 100
 OUTPUT_BATCH = 25 # song created is of length (chords): (OUTPUT_BATCH * chords_on_either_side * 2) + OUTPUT_BATCH
 
 # START of model definition
+
 model = tf.keras.Sequential()
-model.add(layers.LSTM(512,activation='tanh',recurrent_activation='sigmoid',return_sequences=True, input_shape=(2 * chords_on_either_side, chord_array_len)))
+#model.add(layers.LSTM(512,activation='tanh',recurrent_activation='sigmoid',return_sequences=True, input_shape=(2 * chords_on_either_side, chord_array_len)))
+model.add(layers.GRU(512, activation='tanh', recurrent_activation='sigmoid', return_sequences=True, return_state=False, input_shape=(2 * chords_on_either_side, chord_array_len)))
 model.add(layers.Dropout(0.15))
-model.add(layers.LSTM(256,activation='tanh',recurrent_activation='sigmoid',return_sequences=False))
+#model.add(layers.LSTM(256,activation='tanh',recurrent_activation='sigmoid',return_sequences=False))
+model.add(layers.GRU(256,activation='tanh',recurrent_activation='sigmoid',return_sequences=False))
 model.add(layers.Dropout(0.15))
 model.add(layers.Dense(chord_array_len))
 model.add(layers.Activation('softmax'))
+
 # END of model definition
 
 model.compile(
@@ -36,7 +40,6 @@ model.compile(
     optimizer='adam',
     metrics=['accuracy',f1_m]
 )
-
 
 model.summary()
 plot_model(model, to_file='projF_model_plot.png', show_shapes=True, show_layer_names=True)
@@ -71,9 +74,9 @@ plt.savefig('ProjF_Plot_Loss.png')
 #plt.show()
 plt.close()
 
-model.save('ProjF_ModelC_07.hd5')
+model.save('ProjF_ModelD.hd5')
 #del model
-#model = load_model('ProjF_ModelB_01.hd5')
+#model = load_model('ProjF_Model.hd5')
 
 
 counter = 0

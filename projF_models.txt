@@ -37,3 +37,16 @@ model.add(layers.LSTM(256,activation='tanh',recurrent_activation='sigmoid',retur
 model.add(layers.Dropout(0.15))
 model.add(layers.Dense(chord_array_len))
 model.add(layers.Activation('softmax'))
+
+
+ModelD:
+
+model = tf.keras.Sequential()
+#model.add(layers.LSTM(512,activation='tanh',recurrent_activation='sigmoid',return_sequences=True, input_shape=(2 * chords_on_either_side, chord_array_len)))
+model.add(layers.GRU(512, activation='tanh', recurrent_activation='sigmoid', return_sequences=True, return_state=False, input_shape=(2 * chords_on_either_side, chord_array_len)))
+model.add(layers.Dropout(0.15))
+#model.add(layers.LSTM(256,activation='tanh',recurrent_activation='sigmoid',return_sequences=False))
+model.add(layers.GRU(256,activation='tanh',recurrent_activation='sigmoid',return_sequences=False))
+model.add(layers.Dropout(0.15))
+model.add(layers.Dense(chord_array_len))
+model.add(layers.Activation('softmax'))
