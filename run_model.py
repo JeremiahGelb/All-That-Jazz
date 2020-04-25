@@ -5,34 +5,31 @@ import tensorflow as tf
 import random
 from tensorflow.keras import layers
 from Chord import Chord
-from data_gen import data_gen
+from data_gen import data_gen, testdata_gen
 from tensorflow.keras.utils import plot_model
 from metrics import f1_m
 from tensorflow.keras.models import load_model
+from load_pickle import return_songs_as_list_of_lists_of_chords, return_songs_as_list_of_lists_of_np_arrays
 
 # import matplotlib.pyplot as plt
-
+#TEST_FILE = "test.pickle"
 sample_chord = Chord()
 chord_array_len = sample_chord.number_of_unique_roots * sample_chord.number_of_unique_qualities
 
 batch_size = 50
-chords_on_either_side = 4
+chords_on_either_side = 3
 STEPS_PER_EPOCH = 1024
-TOTAL_EPOCHS = 100
+TOTAL_EPOCHS = 70
 OUTPUT_BATCH = 25 # song created is of length (chords): (OUTPUT_BATCH * chords_on_either_side * 2) + OUTPUT_BATCH
 
 # START of model definition
-
 model = tf.keras.Sequential()
-#model.add(layers.LSTM(512,activation='tanh',recurrent_activation='sigmoid',return_sequences=True, input_shape=(2 * chords_on_either_side, chord_array_len)))
-model.add(layers.GRU(512, activation='tanh', recurrent_activation='sigmoid', return_sequences=True, return_state=False, input_shape=(2 * chords_on_either_side, chord_array_len)))
+model.add(layers.LSTM(512,activation='tanh',recurrent_activation='sigmoid',return_sequences=True, input_shape=(2 * chords_on_either_side, chord_array_len)))
 model.add(layers.Dropout(0.15))
-#model.add(layers.LSTM(256,activation='tanh',recurrent_activation='sigmoid',return_sequences=False))
-model.add(layers.GRU(256,activation='tanh',recurrent_activation='sigmoid',return_sequences=False))
+model.add(layers.LSTM(256,activation='tanh',recurrent_activation='sigmoid',return_sequences=False))
 model.add(layers.Dropout(0.15))
 model.add(layers.Dense(chord_array_len))
 model.add(layers.Activation('softmax'))
-
 # END of model definition
 
 model.compile(
@@ -50,8 +47,8 @@ history = model.fit(
     data_gen(chords_on_either_side=chords_on_either_side, batch_size=batch_size),
     steps_per_epoch=STEPS_PER_EPOCH,
     epochs=TOTAL_EPOCHS,verbose=1)
-    
-  
+
+
 # Plot training accuracy values
 # Plot F1 Metric
 plt.plot(history.history['f1_m'],marker=".",color="Blue")
@@ -73,16 +70,18 @@ plt.legend(['Train'], loc='upper right')
 plt.savefig('ProjF_Plot_Loss.png')
 #plt.show()
 plt.close()
-
-model.save('ProjF_ModelD.hd5')
+#'''
+model.save_weights('ProjF_Weights_G_01.hd5')
 #del model
 #model = load_model('ProjF_Model.hd5')
+#model.load_weights('ProjF_Weights.hd5')
+#test_songs = return_songs_as_list_of_lists_of_np_arrays(filename=TEST_FILE)
 
 
 counter = 0
 for chords_x,chord_y,n in data_gen(chords_on_either_side=chords_on_either_side, batch_size=OUTPUT_BATCH):
     counter = counter + 1
-    if counter > 1:
+    if counter >= 1:
         break
 
 ch_prediction_array = model.predict(x=chords_x)
@@ -98,7 +97,30 @@ for idx in range(0,total_chords):
     print("index: {}  ch_prediction: {}  actual_chord: {} ".format(idx,ch_prediction, ch_actual))
 
 accuracy = matching_chords / total_chords
-print("Correct Predictions: {}/{}  Accuracy: {}".format(matching_chords,total_chords,accuracy))
+print("\r\nTraining Set: Correct Predictions: {}/{}  Accuracy: {}\r\n".format(matching_chords,total_chords,accuracy))
+
+
+
+counter = 0
+for chords_x,chord_y,n in testdata_gen(chords_on_either_side=chords_on_either_side, batch_size=OUTPUT_BATCH):
+    counter = counter + 1
+    if counter >= 1:
+        break
+
+ch_prediction_array = model.predict(x=chords_x)
+
+#obtain and print predictions from the array of chords_x obtained from data_gen
+matching_chords = 0
+total_chords = len(chords_x)
+for idx in range(0,total_chords):
+    if(np.argmax(ch_prediction_array[idx])==np.argmax(chord_y[idx])):
+        matching_chords=matching_chords+1
+    ch_prediction = Chord(np_array=ch_prediction_array[idx])
+    ch_actual = Chord(np_array=chord_y[idx])
+    print("index: {}  ch_prediction: {}  actual_chord: {} ".format(idx,ch_prediction, ch_actual))
+
+accuracy = matching_chords / total_chords
+print("\r\nTest Set Correct Predictions: {}/{}  Accuracy: {}".format(matching_chords,total_chords,accuracy))
 
 #Make a the songs with the predictions, and original center chords using the data generator
 generated_song_np = []
