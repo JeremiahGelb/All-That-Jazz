@@ -3,7 +3,7 @@ import random
 from load_pickle import return_songs_as_list_of_lists_of_np_arrays
 from Chord import Chord
 import numpy as np
-
+TEST_FILE='test.pickle'
 
 def data_gen(chords_on_either_side=2, batch_size=10):
     """
@@ -83,7 +83,7 @@ def testdata_gen(chords_on_either_side=2, batch_size=10):
     and the y data will be [target_chord1
                             target_chord2]
     """
-    songs = return_songs_as_list_of_lists_of_np_arrays(filename='test_songs.pickle')
+    songs = return_songs_as_list_of_lists_of_np_arrays(filename=TEST_FILE)
     len_sequence = 2*chords_on_either_side + 1
     songs = [song for song in songs if len(song) >= len_sequence] #filter short songs
     while True:
