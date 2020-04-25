@@ -128,7 +128,7 @@ print("\r\nTest Set Correct Predictions: {}/{}  Accuracy: {}\r\n".format(matchin
 
 
 counter = 0
-for chords_x,chord_y,n in testdata_output(chords_on_either_side=chords_on_either_side):
+for chords_x,chord_y,n in testdata_output(chords_on_either_side=chords_on_either_side,song_number=0):
     counter = counter + 1
     if counter >= 1:
         break
@@ -190,12 +190,14 @@ mma_style = mma_style_strings[mma_rand_style]  #select a random style
 
 #Write the generated song with multiple predictions inserted
 generated_song_file = open("projF_generated_song_multiple_predictions.mma", "w")
+generated_song_file_orig = open("projF_generated_song_multiple_predictions_orig_format.mma", "w")
 generated_song_file.write("// Song Details..\r\n")
-
+#generated_song_file_orig.write(
 generated_song_file.write("Tempo {}\n".format(mma_tempo))  #write the random tempo & groove style
 generated_song_file.write("Groove {}\n".format(mma_style))
 
 for idx in range(0,len(generated_song_text_multi)):
+    generated_song_file_orig.write(generated_song_text_multi[idx])
     generated_song_file.write(str("{} ".format(idx+1)))
     generated_song_str = generated_song_text_multi[idx].replace(":","")  #more translation would need to be done (seperate function) to fully automate (these get it mostly in MMA format)
     generated_song_str = generated_song_str.replace("min","m")
@@ -204,9 +206,12 @@ for idx in range(0,len(generated_song_text_multi)):
     generated_song_str = generated_song_str.replace("(", "")
     generated_song_str = generated_song_str.replace(')', "")
     generated_song_file.write(generated_song_str)
+
     generated_song_file.write('\n')
+    generated_song_file_orig.write('\n')
 
 generated_song_file.close()
+generated_song_file_orig.close()
 
 
 #Write the generated song with single prediction inserted

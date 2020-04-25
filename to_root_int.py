@@ -19,7 +19,7 @@ TO_ROOT_INT = {
     'E' : 4,
 
     #enharmonic to F
-    'D#' : 5,
+    'E#' : 5,
     'F' : 5,
 
     #enharmonic to Gb

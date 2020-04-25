@@ -64,7 +64,7 @@ def data_gen(chords_on_either_side=2, batch_size=10):
         #print(np.shape(y_batch))
         yield np.array(x_batch), np.array(y_batch), [None] #Magic None to avoid warning :)
 
-
+#Uses test data, but random samples are selected and merged
 def testdata_gen(chords_on_either_side=2, batch_size=10):
     """
     Will return a batch of input data and their labels
@@ -125,8 +125,8 @@ def testdata_gen(chords_on_either_side=2, batch_size=10):
         yield np.array(x_batch), np.array(y_batch), [None] #Magic None to avoid warning :)
         
         
-        
-def testdata_output(chords_on_either_side=2):
+#Uses test data, keeps the original order
+def testdata_output(chords_on_either_side=2,song_number=1):
     """
     Will return a batch of input data and their labels
     Chords on either side is the number of chords on either side of the target chord
@@ -150,14 +150,15 @@ def testdata_output(chords_on_either_side=2):
     while True:
         x_batch = []
         y_batch = []
-        test_song = random.choice(songs) #this will overvalue chords from short songs
+        #test_song = random.choice(songs) #this will overvalue chords from short songs
+        test_song = songs[song_number]
         test_song_size = len(test_song)
         for i in range(test_song_size - len_sequence):
 
             first_xchord_min_index = 0
             first_xchord_max_index = len(test_song) - len_sequence
             #first_xchord_index = random.randint(first_xchord_min_index, first_xchord_max_index)
-            first_xchord_index = i * len_sequence
+            first_xchord_index = (i * len_sequence)-chords_on_either_side  # added '-chords_on_either_side'
             #print("------")
             #print(first_xchord_min_index, first_xchord_max_index, first_xchord_index)
             #print("------")
