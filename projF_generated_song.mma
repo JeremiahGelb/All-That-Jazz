@@ -1,31 +1,24 @@
 // Song Details..
-Tempo 169
-Groove EasySwing
-1 C
-2 Cm7
-3 F7
-4 Dm7 // Predicted
-5 Fm7
-6 Bb7
-7 C
-8 Fm7
-9 Ab7
-10 Dm7
-11 G7 // Predicted
-12 C
-13 Fm7
-14 Ab7
-15 Dm7
-16 G7
-17 C
-18 Cm7 // Predicted
-19 F7
-20 Dm7
-21 Fm7
-22 Bb7
-23 C
-24 Fm7
-25 Ab7 // Predicted
-26 Dm7
-27 G7
-28 Em7
+Tempo 134
+Groove strut
+1 Ab
+2 B7
+3 E
+4 G // Prediction# 1, 0.4720400, Actual G7
+5 C
+6 Gbm7
+7 B7
+8 E
+9 G7
+10 C
+11 Gdim // Prediction# 1, 0.3949573, Actual F7
+12 Ab
+13 Dm7
+14 G7
+15 C
+16 Gbm7
+17 B7
+18 E // Prediction# 1, 0.9132125, Actual E
+19 Bbm7
+20 F7
+21 Ab7

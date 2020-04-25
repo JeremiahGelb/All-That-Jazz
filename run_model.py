@@ -1,6 +1,7 @@
 import collections
 import matplotlib.pyplot as plt
 import numpy as np
+import heapq as hq
 import tensorflow as tf
 import random
 from tensorflow.keras import layers
@@ -23,6 +24,7 @@ chords_on_either_side = 3
 STEPS_PER_EPOCH = 1024
 TOTAL_EPOCHS = 20
 OUTPUT_BATCH = 25 # song created is of length (chords): (OUTPUT_BATCH * chords_on_either_side * 2) + OUTPUT_BATCH
+TOP_NUM = 3 # The 'TOP_NUM' of the predictions, y are included/inserted in the generated song instead of only 1 chord.
 
 # START of model definition
 model = tf.keras.Sequential()
@@ -122,7 +124,7 @@ for idx in range(0,total_chords):
     print("index: {}  ch_prediction: {}  actual_chord: {} ".format(idx,ch_prediction, ch_actual))
 
 accuracy = matching_chords / total_chords
-print("\r\nTest Set Correct Predictions: {}/{}  Accuracy: {}".format(matching_chords,total_chords,accuracy))
+print("\r\nTest Set Correct Predictions: {}/{}  Accuracy: {}\r\n".format(matching_chords,total_chords,accuracy))
 
 
 counter = 0
@@ -132,6 +134,9 @@ for chords_x,chord_y,n in testdata_output(chords_on_either_side=chords_on_either
         break
 
 ch_prediction_array = model.predict(x=chords_x)
+
+#top_predictions = np.argpartition(ch_prediction_array[1],-3)[-3:]   # these are not sorted
+#top_predictions = hq.nlargest(3,range(len(ch_prediction_array[0])),ch_prediction_array[0].take)
 
 #obtain and print predictions from the array of chords_x obtained from data_gen
 matching_chords = 0
@@ -144,21 +149,27 @@ for idx in range(0,total_chords):
     print("index: {}  ch_prediction: {}  actual_chord: {} ".format(idx,ch_prediction, ch_actual))
 
 accuracy = matching_chords / total_chords
-print("\r\nTest Set2 Correct Predictions: {}/{}  Accuracy: {}".format(matching_chords,total_chords,accuracy))
+print("\r\nTest Set 2 Correct Predictions: {}/{}  Accuracy: {}".format(matching_chords,total_chords,accuracy))
 
 
-
-
-
-#Make a the songs with the predictions, and original center chords using the data generator
+#Make a the songs with the predictions, and insert multiple (TOP_NUM) predictions into the song at each location between sets of 'chords_on_either_side'
 #generated_song_np = []
 generated_song_text = []
+generated_song_text_multi = []
 for idx in range(0,total_chords):
+    top_predictions = hq.nlargest(TOP_NUM, range(len(ch_prediction_array[idx])), ch_prediction_array[idx].take) # get the top 'TOP_NUM' prediction (indices)
     for j in range(0,chords_on_either_side):
         generated_song_text.append(str(Chord(np_array=chords_x[idx][j])))
-    temp_str = "{} // Predicted".format(str(Chord(np_array=ch_prediction_array[idx])))
-    generated_song_text.append(temp_str)  #inserted the chord predition into generated song ****
+        generated_song_text_multi.append(str(Chord(np_array=chords_x[idx][j])))
+    for p in range(0,TOP_NUM):        # insert the top 3 predicitons
+        predictions_top_predictions = tf.keras.utils.to_categorical(top_predictions[p],192)
+        temp_str = "{} // Prediction# {}, {:1.7f}".format(str(Chord(np_array=predictions_top_predictions)),p+1,ch_prediction_array[idx][top_predictions[p]])
+        if (p == 0):
+            temp_str = temp_str + ", Actual: {}".format(str(Chord(np_array=chord_y[idx])))
+            generated_song_text.append(temp_str)  #inserted the chord predition into generated song ****
+        generated_song_text_multi.append(temp_str)  #inserted the chord predition into generated song ****
     for j in range(chords_on_either_side,chords_on_either_side*2):
+        generated_song_text_multi.append(str(Chord(np_array=chords_x[idx][j])))
         generated_song_text.append(str(Chord(np_array=chords_x[idx][j])))
 
 
@@ -176,6 +187,29 @@ mma_style_strings = ["Blues1","Blues","BossaNova","68Swing","strut","EasySwing",
 mma_rand_style = random.randrange(0,len(mma_style_strings),1)
 mma_style = mma_style_strings[mma_rand_style]  #select a random style
 
+
+#Write the generated song with multiple predictions inserted
+generated_song_file = open("projF_generated_song_multiple_predictions.mma", "w")
+generated_song_file.write("// Song Details..\r\n")
+
+generated_song_file.write("Tempo {}\n".format(mma_tempo))  #write the random tempo & groove style
+generated_song_file.write("Groove {}\n".format(mma_style))
+
+for idx in range(0,len(generated_song_text_multi)):
+    generated_song_file.write(str("{} ".format(idx+1)))
+    generated_song_str = generated_song_text_multi[idx].replace(":","")  #more translation would need to be done (seperate function) to fully automate (these get it mostly in MMA format)
+    generated_song_str = generated_song_str.replace("min","m")
+    generated_song_str = generated_song_str.replace("maj", "")
+    generated_song_str = generated_song_str.replace("aug", "+")
+    generated_song_str = generated_song_str.replace("(", "")
+    generated_song_str = generated_song_str.replace(')', "")
+    generated_song_file.write(generated_song_str)
+    generated_song_file.write('\n')
+
+generated_song_file.close()
+
+
+#Write the generated song with single prediction inserted
 generated_song_file = open("projF_generated_song.mma", "w")
 generated_song_file.write("// Song Details..\r\n")
 

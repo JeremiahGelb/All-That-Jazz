@@ -1,0 +1,30 @@
+// Song Details..
+Tempo 134
+Groove strut
+1 Ab
+2 B7
+3 E
+4 G // Prediction# 1, 0.4720400, Actual G7
+5 B // Prediction# 2, 0.2713979
+6 Dbm7 // Prediction# 3, 0.0575988
+7 C
+8 Gbm7
+9 B7
+10 E
+11 G7
+12 C
+13 Gdim // Prediction# 1, 0.3949573, Actual F7
+14 F7 // Prediction# 2, 0.1579105
+15 B7 // Prediction# 3, 0.1519702
+16 Ab
+17 Dm7
+18 G7
+19 C
+20 Gbm7
+21 B7
+22 E // Prediction# 1, 0.9132125, Actual E
+23 Bb // Prediction# 2, 0.0735814
+24 B7 // Prediction# 3, 0.0078220
+25 Bbm7
+26 F7
+27 Ab7
