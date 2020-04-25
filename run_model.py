@@ -7,7 +7,7 @@ from tensorflow.keras import layers
 from tensorflow.keras.utils import plot_model
 from tensorflow.keras.optimizers import Adam
 from Chord import Chord
-from data_gen import data_gen, testdata_gen
+from data_gen import data_gen, testdata_gen, testdata_output
 
 from metrics import f1_m
 from tensorflow.keras.models import load_model
@@ -45,7 +45,7 @@ model.summary()
 plot_model(model, to_file='projF_model_plot.png', show_shapes=True, show_layer_names=True)
 # currently training and validaiting with random data
 
-
+'''
 history = model.fit(
     data_gen(chords_on_either_side=chords_on_either_side, batch_size=batch_size),
     steps_per_epoch=STEPS_PER_EPOCH,
@@ -73,12 +73,11 @@ plt.legend(['Train'], loc='upper right')
 plt.savefig('ProjF_Plot_Loss.png')
 #plt.show()
 plt.close()
-#'''
-model.save_weights('ProjF_Weights_B_04.hd5')
+'''
+#model.save_weights('ProjF_Weights_I_05.hd5')
 #del model
 #model = load_model('ProjF_Model.hd5')
-#model.load_weights('ProjF_Weights.hd5')
-#test_songs = return_songs_as_list_of_lists_of_np_arrays(filename=TEST_FILE)
+model.load_weights('ProjF_Weights_I_05.hd5')
 
 
 counter = 0
@@ -125,38 +124,67 @@ for idx in range(0,total_chords):
 accuracy = matching_chords / total_chords
 print("\r\nTest Set Correct Predictions: {}/{}  Accuracy: {}".format(matching_chords,total_chords,accuracy))
 
+
+counter = 0
+for chords_x,chord_y,n in testdata_output(chords_on_either_side=chords_on_either_side):
+    counter = counter + 1
+    if counter >= 1:
+        break
+
+ch_prediction_array = model.predict(x=chords_x)
+
+#obtain and print predictions from the array of chords_x obtained from data_gen
+matching_chords = 0
+total_chords = len(chords_x)
+for idx in range(0,total_chords):
+    if(np.argmax(ch_prediction_array[idx])==np.argmax(chord_y[idx])):
+        matching_chords=matching_chords+1
+    ch_prediction = Chord(np_array=ch_prediction_array[idx])
+    ch_actual = Chord(np_array=chord_y[idx])
+    print("index: {}  ch_prediction: {}  actual_chord: {} ".format(idx,ch_prediction, ch_actual))
+
+accuracy = matching_chords / total_chords
+print("\r\nTest Set2 Correct Predictions: {}/{}  Accuracy: {}".format(matching_chords,total_chords,accuracy))
+
+
+
+
+
 #Make a the songs with the predictions, and original center chords using the data generator
-generated_song_np = []
+#generated_song_np = []
+generated_song_text = []
 for idx in range(0,total_chords):
     for j in range(0,chords_on_either_side):
-        generated_song_np.append(chords_x[idx][j])
-    generated_song_np.append(ch_prediction_array[idx])  #inserted the chord predition into generated song
+        generated_song_text.append(str(Chord(np_array=chords_x[idx][j])))
+    temp_str = "{} // Predicted".format(str(Chord(np_array=ch_prediction_array[idx])))
+    generated_song_text.append(temp_str)  #inserted the chord predition into generated song ****
     for j in range(chords_on_either_side,chords_on_either_side*2):
-        generated_song_np.append(chords_x[idx][j])
+        generated_song_text.append(str(Chord(np_array=chords_x[idx][j])))
 
 
 #Convert song to text to play with MMA
-generated_song_text = []
-for idx in range(0,len(generated_song_np)):
-        generated_song_text.append(Chord(np_array=generated_song_np[idx]))
+#generated_song_text = []
+#for idx in range(0,len(generated_song_np)):
+#        generated_song_text.append(Chord(np_array=generated_song_np[idx]))
 
 
-#Create a text file of the new song in MMA format
+#Create a text file of the new song, generated using the datagenerator, random batches with test_songs.txt as the source chords in MMA format
 
 
 mma_tempo = random.randrange(90,180,1)   #Select a random tempo
 mma_style_strings = ["Blues1","Blues","BossaNova","68Swing","strut","EasySwing","Swing2","BluesSus"]
 mma_rand_style = random.randrange(0,len(mma_style_strings),1)
 mma_style = mma_style_strings[mma_rand_style]  #select a random style
+
 generated_song_file = open("projF_generated_song.mma", "w")
 generated_song_file.write("// Song Details..\r\n")
 
 generated_song_file.write("Tempo {}\n".format(mma_tempo))  #write the random tempo & groove style
 generated_song_file.write("Groove {}\n".format(mma_style))
 
-for idx in range(0,len(generated_song_np)):
+for idx in range(0,len(generated_song_text)):
     generated_song_file.write(str("{} ".format(idx+1)))
-    generated_song_str = str(generated_song_text[idx]).replace(":","")  #more translation would need to be done (seperate function) to fully automate (these get it mostly in MMA format)
+    generated_song_str = generated_song_text[idx].replace(":","")  #more translation would need to be done (seperate function) to fully automate (these get it mostly in MMA format)
     generated_song_str = generated_song_str.replace("min","m")
     generated_song_str = generated_song_str.replace("maj", "")
     generated_song_str = generated_song_str.replace("aug", "+")

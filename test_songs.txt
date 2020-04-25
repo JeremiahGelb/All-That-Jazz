@@ -1,0 +1,3 @@
+_START_ C:maj E:7 A:7 D:min7 E:7 A:min7 D:7 D:min7 G:7 C:maj E:7 A:7 D:min7 F:min F:min6 E:min7 A:7 D:min7 G:7 C:maj G:7_END_
+_START_ C:maj C:min7 F:7 D:min7 F:min7 A#:7 C:maj D#:min7 G#:7 D:min7 G:7 C:maj D#:min7 G#:7 D:min7 G:7 C:maj C:min7 F:7 D:min7 F:min7 A#:7 C:maj D#:min7 G#:7 D:min7 G:7 E:min7 D#:min7 D:min7 G:7 C:maj _END_
+_START_ G#:maj B:7 E:maj G:7 C:maj F#:min7 B:7 E:maj7 G:7 C:maj D#:7 G#:maj D:min7 G:7 C:maj F#:min7 B:7 E:maj7 A#:min7 D#:7 G#:7 D:min7 G:7 C:7 A#:min7 D#:7 _END_
