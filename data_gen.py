@@ -153,12 +153,14 @@ def testdata_output(chords_on_either_side=2,song_number=1):
         #test_song = random.choice(songs) #this will overvalue chords from short songs
         test_song = songs[song_number]
         test_song_size = len(test_song)
+        first_xchord_index = 0
         for i in range(test_song_size - len_sequence):
 
             first_xchord_min_index = 0
             first_xchord_max_index = len(test_song) - len_sequence
             #first_xchord_index = random.randint(first_xchord_min_index, first_xchord_max_index)
-            first_xchord_index = (i * len_sequence)-chords_on_either_side  # added '-chords_on_either_side'
+
+            first_xchord_index = (i * len_sequence)
             #print("------")
             #print(first_xchord_min_index, first_xchord_max_index, first_xchord_index)
             #print("------")

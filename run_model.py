@@ -9,7 +9,7 @@ from tensorflow.keras.utils import plot_model
 from tensorflow.keras.optimizers import Adam
 from Chord import Chord
 from data_gen import data_gen, testdata_gen, testdata_output
-
+from tensorflow.keras.callbacks import CSVLogger
 from metrics import f1_m
 from tensorflow.keras.models import load_model
 from load_pickle import return_songs_as_list_of_lists_of_chords, return_songs_as_list_of_lists_of_np_arrays
@@ -22,9 +22,11 @@ chord_array_len = sample_chord.number_of_unique_roots * sample_chord.number_of_u
 batch_size = 50
 chords_on_either_side = 3
 STEPS_PER_EPOCH = 1024
-TOTAL_EPOCHS = 20
+TOTAL_EPOCHS = 30
 OUTPUT_BATCH = 25 # song created is of length (chords): (OUTPUT_BATCH * chords_on_either_side * 2) + OUTPUT_BATCH
 TOP_NUM = 3 # The 'TOP_NUM' of the predictions, y are included/inserted in the generated song instead of only 1 chord.
+LEARNING_RATE = 0.01
+MODEL_ID = 'I'
 
 # START of model definition
 model = tf.keras.Sequential()
@@ -46,14 +48,18 @@ model.compile(
 model.summary()
 plot_model(model, to_file='projF_model_plot.png', show_shapes=True, show_layer_names=True)
 # currently training and validaiting with random data
+log_file = open("model_history_log.csv","a")
+log_file.write("\nTrial Details: Model ID: {}, Batch Size: {}, CES: {}, Epochs: {}, Learning Rate: {}".format(MODEL_ID,batch_size,chords_on_either_side,TOTAL_EPOCHS,LEARNING_RATE))
+log_file.write("\nEpoch#,Accuracy,F1-Score,Loss\n")
+log_file.close()
+csv_logger = CSVLogger("model_history_log.csv", append=True,separator=',')
 
-'''
 history = model.fit(
     data_gen(chords_on_either_side=chords_on_either_side, batch_size=batch_size),
     steps_per_epoch=STEPS_PER_EPOCH,
-    epochs=TOTAL_EPOCHS,verbose=1)
+    epochs=TOTAL_EPOCHS,verbose=1,callbacks=[csv_logger])
 
-
+#'''
 # Plot training accuracy values
 # Plot F1 Metric
 plt.plot(history.history['f1_m'],marker=".",color="Blue")
@@ -75,7 +81,7 @@ plt.legend(['Train'], loc='upper right')
 plt.savefig('ProjF_Plot_Loss.png')
 #plt.show()
 plt.close()
-'''
+#'''
 #model.save_weights('ProjF_Weights_I_05.hd5')
 #del model
 #model = load_model('ProjF_Model.hd5')
@@ -158,6 +164,7 @@ generated_song_text = []
 generated_song_text_multi = []
 for idx in range(0,total_chords):
     top_predictions = hq.nlargest(TOP_NUM, range(len(ch_prediction_array[idx])), ch_prediction_array[idx].take) # get the top 'TOP_NUM' prediction (indices)
+
     for j in range(0,chords_on_either_side):
         generated_song_text.append(str(Chord(np_array=chords_x[idx][j])))
         generated_song_text_multi.append(str(Chord(np_array=chords_x[idx][j])))
