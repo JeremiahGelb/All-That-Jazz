@@ -41,15 +41,22 @@ model.summary()
 
 model.load_weights('ProjF_Weights_I_06_Idx_08.hd5')
 
+one = Chord("C:min")
+two = Chord("D:hdim")
+five = Chord("G:7")
+for i in range(12):
+    chords = [Chord(), two, five, Chord(), Chord(), Chord()]
+    chords_np = [chord.np_array() for chord in chords]
+    two_five = np.array(chords_np)
+    x = np.array([two_five, two_five, two_five])
+    predictions_probablity = model.predict(x=x)
+    top_predictions = hq.nlargest(2, range(len(predictions_probablity[0])), predictions_probablity[0].take)
+    top_predicitons_np = [tf.keras.utils.to_categorical(prediction,192) for prediction in top_predictions]
+    print()
+    print("Two:", two, "Five:", five, "One", one)
+    print("Predictions:", [ str(Chord(np_array=np_array)) for index, np_array in enumerate(top_predicitons_np) ])
 
-chords = [Chord(), Chord("D:min7"), Chord("G:7"), Chord(), Chord(), Chord()]
-chords_np = [chord.np_array() for chord in chords]
+    one.root = (one.root + 1) % one.number_of_unique_roots
+    two.root = (two.root + 1) % two.number_of_unique_roots
+    five.root = (five.root + 1) % five.number_of_unique_roots
 
-tfo_c_x = np.array(chords_np)
-
-x = np.array([tfo_c_x, tfo_c_x, tfo_c_x])
-
-tfo_x_y = model.predict(x=x)
-
-output_chord = Chord(np_array = tfo_x_y[0])
-print(output_chord)
