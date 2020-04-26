@@ -1,48 +1,60 @@
 // Song Details..
-Tempo 96
-Groove Blues1
+Tempo 118
+Groove BossaNova
 1 C
 2 Cm7
 3 F7
-4 Dm7 // Prediction# 1, 0.9822332, Actual Dm7
-5 Ab // Prediction# 2, 0.0069080
-6 Bb // Prediction# 3, 0.0044074
+4 Dm7 // Prediction# 1, 0.9999992, Actual Dm7
+5 C // Prediction# 2, 0.0000004
+6 Bb // Prediction# 3, 0.0000004
 7 Fm7
 8 Bb7
 9 C
-10 Fm7 // Prediction# 1, 0.9927810, Actual Ebm7
-11 Am7 // Prediction# 2, 0.0062714
-12 F // Prediction# 3, 0.0002369
+10 Fm7 // Prediction# 1, 0.9999176, Actual Ebm7
+11 C // Prediction# 2, 0.0000419
+12 Am7 // Prediction# 3, 0.0000210
 13 Ab7
 14 Dm7
 15 G7
-16 C // Prediction# 1, 0.9629999, Actual C
-17 Dm7 // Prediction# 2, 0.0099152
-18 Fm7 // Prediction# 3, 0.0094500
+16 C // Prediction# 1, 0.7043140, Actual C
+17 Fm7 // Prediction# 2, 0.0666431
+18 Cm7 // Prediction# 3, 0.0629333
 19 Ebm7
 20 Ab7
 21 Dm7
-22 G7 // Prediction# 1, 0.8781666, Actual G7
-23 G7b9 // Prediction# 2, 0.1051142
-24 G+b7 // Prediction# 3, 0.0077728
+22 G7 // Prediction# 1, 0.9987260, Actual G7
+23 Gsus4 // Prediction# 2, 0.0008651
+24 G+b7 // Prediction# 3, 0.0002178
 25 C
 26 Cm7
 27 F7
-28 Dm7 // Prediction# 1, 0.9822332, Actual Dm7
-29 Ab // Prediction# 2, 0.0069080
-30 Bb // Prediction# 3, 0.0044074
+28 Dm7 // Prediction# 1, 0.9999992, Actual Dm7
+29 C // Prediction# 2, 0.0000004
+30 Bb // Prediction# 3, 0.0000004
 31 Fm7
 32 Bb7
 33 C
-34 Fm7 // Prediction# 1, 0.9927810, Actual Ebm7
-35 Am7 // Prediction# 2, 0.0062714
-36 F // Prediction# 3, 0.0002369
+34 Fm7 // Prediction# 1, 0.9999176, Actual Ebm7
+35 C // Prediction# 2, 0.0000419
+36 Am7 // Prediction# 3, 0.0000210
 37 Ab7
 38 Dm7
 39 G7
-40 C // Prediction# 1, 0.7449055, Actual Em7
-41 Dm7 // Prediction# 2, 0.2471938
-42 Fm7 // Prediction# 3, 0.0035013
+40 C // Prediction# 1, 0.8545406, Actual Em7
+41 Dm7 // Prediction# 2, 0.1210266
+42 Cm7 // Prediction# 3, 0.0051060
 43 Ebm7
 44 Dm7
 45 G7
+46 C // Prediction# 1, 0.9900466, Actual C
+47 Dbdim // Prediction# 2, 0.0026609
+48 A7 // Prediction# 3, 0.0024459
+49 Dm7
+50 G7
+51 C
+52 Cm7 // Prediction# 1, 0.9861258, Actual Cm7
+53 Gm7 // Prediction# 2, 0.0064297
+54 Gb7 // Prediction# 3, 0.0034872
+55 F7
+56 Dm7
+57 Fm7

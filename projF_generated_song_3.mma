@@ -1,34 +1,54 @@
 // Song Details..
-Tempo 171
-Groove strut
+Tempo 165
+Groove Blues
 1 Ab
 2 B7
 3 E
-4 B // Prediction# 1, 0.2928537, Actual G7
+4 Db7 // Prediction# 1, 0.7248760, Actual G7
 5 C
 6 Gbm7
 7 B7
-8 Em7 // Prediction# 1, 0.5150781, Actual E
+8 Em7 // Prediction# 1, 0.7225453, Actual E
 9 G7
 10 C
 11 Eb7
-12 G7 // Prediction# 1, 0.2783500, Actual Ab
+12 G7 // Prediction# 1, 0.2040187, Actual Ab
 13 Dm7
 14 G7
 15 C
-16 Gbm7 // Prediction# 1, 0.9944379, Actual Gbm7
+16 E // Prediction# 1, 0.5173195, Actual Gbm7
 17 B7
 18 E
 19 Bbm7
-20 F7 // Prediction# 1, 0.6193267, Actual Eb7
+20 B7 // Prediction# 1, 0.9977361, Actual Eb7
 21 Ab7
 22 Dm7
 23 G7
-24 C // Prediction# 1, 0.6456750, Actual C7
+24 C // Prediction# 1, 0.9535831, Actual C7
 25 Bbm7
 26 Eb7
 27 Ab
-28 F // Prediction# 1, 0.4333008, Actual B7
+28 Am7 // Prediction# 1, 0.1946647, Actual B7
 29 E
 30 G7
 31 C
+32 Gbm7 // Prediction# 1, 0.8985303, Actual Gbm7
+33 B7
+34 E
+35 G7
+36 C // Prediction# 1, 0.8833569, Actual C
+37 Eb7
+38 Ab
+39 Dm7
+40 G7 // Prediction# 1, 0.9272721, Actual G7
+41 C
+42 Gbm7
+43 B7
+44 E // Prediction# 1, 0.9999981, Actual E
+45 Bbm7
+46 Eb7
+47 Ab7
+48 Db // Prediction# 1, 0.6103693, Actual Dm7
+49 G7
+50 C7
+51 Bbm7

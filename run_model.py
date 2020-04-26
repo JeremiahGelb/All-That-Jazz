@@ -22,10 +22,10 @@ chord_array_len = sample_chord.number_of_unique_roots * sample_chord.number_of_u
 batch_size = 50
 chords_on_either_side = 3
 STEPS_PER_EPOCH = 1024
-TOTAL_EPOCHS = 15
+TOTAL_EPOCHS = 70
 OUTPUT_BATCH = 25 # song created is of length (chords): (OUTPUT_BATCH * chords_on_either_side * 2) + OUTPUT_BATCH
 TOP_NUM = 3 # The 'TOP_NUM' of the predictions, y are included/inserted in the generated song instead of only 1 chord.
-LEARNING_RATE = 0.01
+LEARNING_RATE = 0.005
 MODEL_ID = 'I'
 
 # START of model definition
@@ -39,7 +39,7 @@ model.add(layers.Activation('softmax'))
 # END of model definition
 
 model.compile(
-    Adam(lr=0.001),
+    Adam(lr=LEARNING_RATE),
     loss='categorical_crossentropy',
     #optimizer='adam',
     metrics=['accuracy',f1_m]
@@ -49,7 +49,7 @@ model.summary()
 plot_model(model, to_file='projF_model_plot.png', show_shapes=True, show_layer_names=True)
 # currently training and validaiting with random data
 
-'''
+#'''
 log_file = open("model_history_log.csv","a")
 log_file.write("\nTrial Details: Model ID: {}, Batch Size: {}, CES: {}, Epochs: {}, Learning Rate: {}".format(MODEL_ID,batch_size,chords_on_either_side,TOTAL_EPOCHS,LEARNING_RATE))
 log_file.write("\nEpoch#,Accuracy,F1-Score,Loss\n")
@@ -83,11 +83,11 @@ plt.legend(['Train'], loc='upper right')
 plt.savefig('ProjF_Plot_Loss.png')
 #plt.show()
 plt.close()
-'''
-#model.save_weights('ProjF_Weights_I_06.hd5')
+#'''
+model.save_weights('ProjF_Weights_I_06_Idx_08.hd5')
 #del model
 #model = load_model('ProjF_Model.hd5')
-model.load_weights('ProjF_Weights_I_06.hd5')
+#model.load_weights('ProjF_Weights_I_06.hd5')
 
 
 counter = 0
@@ -169,7 +169,7 @@ for song_num in range (0,3):
         counter = counter + 1
         if counter >= 1:
             break
-
+    total_chords = len(chords_x)
     ch_prediction_array = model.predict(x=chords_x)
     generated_song_text = []
     generated_song_text_multi = []
