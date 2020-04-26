@@ -49,7 +49,7 @@ model.summary()
 plot_model(model, to_file='projF_model_plot.png', show_shapes=True, show_layer_names=True)
 # currently training and validaiting with random data
 
-#'''
+'''
 log_file = open("model_history_log.csv","a")
 log_file.write("\nTrial Details: Model ID: {}, Batch Size: {}, CES: {}, Epochs: {}, Learning Rate: {}".format(MODEL_ID,batch_size,chords_on_either_side,TOTAL_EPOCHS,LEARNING_RATE))
 log_file.write("\nEpoch#,Accuracy,F1-Score,Loss\n")
@@ -83,11 +83,11 @@ plt.legend(['Train'], loc='upper right')
 plt.savefig('ProjF_Plot_Loss.png')
 #plt.show()
 plt.close()
-#'''
-model.save_weights('ProjF_Weights_I_06_Idx_08.hd5')
+'''
+#model.save_weights('ProjF_Weights_I_06_Idx_08.hd5')
 #del model
 #model = load_model('ProjF_Model.hd5')
-#model.load_weights('ProjF_Weights_I_06.hd5')
+model.load_weights('ProjF_Weights_I_06_Idx_08.hd5')
 
 
 counter = 0
@@ -200,7 +200,7 @@ for song_num in range (0,3):
     #Write the generated song with multiple predictions inserted
     generated_song_file = open("projF_generated_song_{}_multiple_predictions.mma".format(song_num+1), "w")
     generated_song_file_orig = open("projF_generated_song_{}_multiple_predictions_orig_format.txt".format(song_num+1), "w")
-    generated_song_file.write("// Song Details..\r\n")
+    generated_song_file.write("// Based on Song# {}\r\n".format(song_num+1))
     #generated_song_file_orig.write(
     generated_song_file.write("Tempo {}\n".format(mma_tempo))  #write the random tempo & groove style
     generated_song_file.write("Groove {}\n".format(mma_style))
@@ -225,7 +225,7 @@ for song_num in range (0,3):
 
     #Write the generated song with single prediction inserted
     generated_song_file = open("projF_generated_song_{}.mma".format(song_num+1), "w")
-    generated_song_file.write("// Song Details..\r\n")
+    generated_song_file.write("// Based on Song# {}\r\n".format(song_num+1))
 
     generated_song_file.write("Tempo {}\n".format(mma_tempo))  #write the random tempo & groove style
     generated_song_file.write("Groove {}\n".format(mma_style))
