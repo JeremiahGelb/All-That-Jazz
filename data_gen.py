@@ -160,11 +160,11 @@ def testdata_output(chords_on_either_side=2,song_number=1):
             first_xchord_max_index = len(test_song) - len_sequence
             #first_xchord_index = random.randint(first_xchord_min_index, first_xchord_max_index)
 
-            first_xchord_index = (i * len_sequence)
+            first_xchord_index = i * (len_sequence - chords_on_either_side)
             #print("------")
             #print(first_xchord_min_index, first_xchord_max_index, first_xchord_index)
             #print("------")
-            if((first_xchord_index+chords_on_either_side+chords_on_either_side+1)>=test_song_size):
+            if((first_xchord_index+chords_on_either_side+chords_on_either_side)>=test_song_size):
                 break
             x_before = test_song[first_xchord_index:(first_xchord_index+chords_on_either_side)]
             y = test_song[first_xchord_index+chords_on_either_side]

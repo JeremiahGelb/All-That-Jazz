@@ -1,0 +1,48 @@
+// Song Details..
+Tempo 104
+Groove Swing2
+1 C
+2 E7
+3 A7
+4 Dm7 // Prediction# 1, 0.9290966, Actual Dm7
+5 D7 // Prediction# 2, 0.0281186
+6 Am7 // Prediction# 3, 0.0192156
+7 E7
+8 Am7
+9 D7
+10 Dm7 // Prediction# 1, 0.9658866, Actual Dm7
+11 D+b7 // Prediction# 2, 0.0100755
+12 Fm7 // Prediction# 3, 0.0051112
+13 G7
+14 C
+15 E7
+16 A7 // Prediction# 1, 0.7912446, Actual A7
+17 Am7 // Prediction# 2, 0.1802438
+18 A7b9 // Prediction# 3, 0.0054746
+19 Dm7
+20 Fm7
+21 Fm6
+22 C // Prediction# 1, 0.7027295, Actual Em7
+23 Em7 // Prediction# 2, 0.2839546
+24 C7 // Prediction# 3, 0.0049925
+25 A7
+26 Dm7
+27 G7
+28 C // Prediction# 1, 0.4976725, Actual C
+29 Dm7 // Prediction# 2, 0.3370807
+30 D7 // Prediction# 3, 0.0433751
+31 G7
+32 C
+33 E7
+34 Am7 // Prediction# 1, 0.7845369, Actual A7
+35 A7 // Prediction# 2, 0.2127028
+36 F // Prediction# 3, 0.0005782
+37 Dm7
+38 E7
+39 Am7
+40 D7 // Prediction# 1, 0.9854629, Actual D7
+41 D // Prediction# 2, 0.0107277
+42 C // Prediction# 3, 0.0008733
+43 Dm7
+44 G7
+45 C

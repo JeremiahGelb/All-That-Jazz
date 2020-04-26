@@ -1,0 +1,45 @@
+C:maj
+C:min7
+F:7
+D:min7 // Prediction# 1, 0.9822332, Actual D:min7
+Ab:maj // Prediction# 2, 0.0069080
+Bb:maj // Prediction# 3, 0.0044074
+F:min7
+Bb:7
+C:maj
+F:min7 // Prediction# 1, 0.9927810, Actual Eb:min7
+A:min7 // Prediction# 2, 0.0062714
+F:maj // Prediction# 3, 0.0002369
+Ab:7
+D:min7
+G:7
+C:maj // Prediction# 1, 0.9629999, Actual C:maj
+D:min7 // Prediction# 2, 0.0099152
+F:min7 // Prediction# 3, 0.0094500
+Eb:min7
+Ab:7
+D:min7
+G:7 // Prediction# 1, 0.8781666, Actual G:7
+G:7(b9) // Prediction# 2, 0.1051142
+G:aug(b7) // Prediction# 3, 0.0077728
+C:maj
+C:min7
+F:7
+D:min7 // Prediction# 1, 0.9822332, Actual D:min7
+Ab:maj // Prediction# 2, 0.0069080
+Bb:maj // Prediction# 3, 0.0044074
+F:min7
+Bb:7
+C:maj
+F:min7 // Prediction# 1, 0.9927810, Actual Eb:min7
+A:min7 // Prediction# 2, 0.0062714
+F:maj // Prediction# 3, 0.0002369
+Ab:7
+D:min7
+G:7
+C:maj // Prediction# 1, 0.7449055, Actual E:min7
+D:min7 // Prediction# 2, 0.2471938
+F:min7 // Prediction# 3, 0.0035013
+Eb:min7
+D:min7
+G:7

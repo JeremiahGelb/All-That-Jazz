@@ -1,0 +1,48 @@
+// Song Details..
+Tempo 171
+Groove strut
+1 Ab
+2 B7
+3 E
+4 B // Prediction# 1, 0.2928537, Actual G7
+5 G // Prediction# 2, 0.2286415
+6 Gbm7 // Prediction# 3, 0.1182609
+7 C
+8 Gbm7
+9 B7
+10 Em7 // Prediction# 1, 0.5150781, Actual E
+11 E // Prediction# 2, 0.1498937
+12 Gbm7 // Prediction# 3, 0.0883010
+13 G7
+14 C
+15 Eb7
+16 G7 // Prediction# 1, 0.2783500, Actual Ab
+17 D7 // Prediction# 2, 0.1958830
+18 A7 // Prediction# 3, 0.1115693
+19 Dm7
+20 G7
+21 C
+22 Gbm7 // Prediction# 1, 0.9944379, Actual Gbm7
+23 Gbhdim // Prediction# 2, 0.0027937
+24 D // Prediction# 3, 0.0003567
+25 B7
+26 E
+27 Bbm7
+28 F7 // Prediction# 1, 0.6193267, Actual Eb7
+29 D7 // Prediction# 2, 0.1600244
+30 Am7 // Prediction# 3, 0.1463600
+31 Ab7
+32 Dm7
+33 G7
+34 C // Prediction# 1, 0.6456750, Actual C7
+35 Cm7 // Prediction# 2, 0.1302861
+36 Abdim // Prediction# 3, 0.1212963
+37 Bbm7
+38 Eb7
+39 Ab
+40 F // Prediction# 1, 0.4333008, Actual B7
+41 F7 // Prediction# 2, 0.3387257
+42 F+b7 // Prediction# 3, 0.1169322
+43 E
+44 G7
+45 C
